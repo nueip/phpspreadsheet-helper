@@ -3,8 +3,8 @@ PHPSpreadsheet Helper
 
 PHP Excel Helper - Write and read Spreadsheet with easy way based on PhpSpreadsheet
 
-[![Latest Stable Version](https://poser.pugx.org/yidas/phpspreadsheet-helper/v/stable?format=flat-square)](https://packagist.org/packages/yidas/phpspreadsheet-helper)
-[![License](https://poser.pugx.org/yidas/phpspreadsheet-helper/license?format=flat-square)](https://packagist.org/packages/yidas/phpspreadsheet-helper)
+[![Latest Stable Version](https://poser.pugx.org/nueip/phpspreadsheet-helper/v/stable?format=flat-square)](https://packagist.org/packages/nueip/phpspreadsheet-helper)
+[![License](https://poser.pugx.org/nueip/phpspreadsheet-helper/license?format=flat-square)](https://packagist.org/packages/nueip/phpspreadsheet-helper)
 
 This library is a helper that encapsulate [PhpSpreadsheet](https://github.com/PHPOffice/PhpSpreadsheet) ([Documentation](https://phpspreadsheet.readthedocs.io/en/develop/)) for simple usage.
 
@@ -13,37 +13,41 @@ This library is a helper that encapsulate [PhpSpreadsheet](https://github.com/PH
 OUTLINE
 -------
 
-* [Demonstration](#demonstration)
-* [Installation](#installation)
-* [Requirements](#requirements)
-* [Usage](#usage)
-  - [Import & Export](#import--export)
-    - [newSpreadsheet()](#newspreadsheet)
-    - [output()](#output)
-    - [save()](#save)
-  - [Get Rows](#get-rows)
-    - [getRow()](#getrow)
-    - [getRows()](#getrows)
-  - [Add Rows](#add-rows)
-    - [addRow()](#addrow)
-    - [addRows()](#addrows)
-    - [Attributes](#attributes)
-  - [PhpSpreadsheet Original Usage Integration](#phpspreadsheet-original-usage-integration)
-    - [Inject PhpSpreadsheet](#inject-phpspreadsheet)
-    - [Extract PhpSpreadsheet](#extract-phpspreadsheet)
-  - [Merge Cells](#merge-cells)
-  - [Multiple Sheets](#multiple-sheets)
-    - [setSheet()](#setsheet)
-    - [getSheet()](#getsheet)
-  - [Map of Coordinates & Ranges](#multiple-sheets)
-  - [Style Attributes](#style-attributes)
-  - [Columns Format](#columns-format)
-  - [All Cells Format](#all-cells-format)
-    - [setStyle()](#setstyle)
-    - [setWrapText()](#setwraptext)
-    - [setAutoSize()](#setautosize)
-- [Limitations](#limitations)
-  - [Performance Issue](#performance-issue)
+- [PHPSpreadsheet Helper](#phpspreadsheet-helper)
+  - [OUTLINE](#outline)
+  - [DEMONSTRATION](#demonstration)
+    - [Write to Excel](#write-to-excel)
+    - [Read from Excel](#read-from-excel)
+  - [REQUIREMENTS](#requirements)
+  - [INSTALLATION](#installation)
+  - [USAGE](#usage)
+    - [Import & Export](#import--export)
+      - [newSpreadsheet()](#newspreadsheet)
+      - [output()](#output)
+      - [save()](#save)
+    - [Get Rows](#get-rows)
+      - [getRow()](#getrow)
+      - [getRows()](#getrows)
+    - [Add Rows](#add-rows)
+      - [addRow()](#addrow)
+      - [addRows()](#addrows)
+      - [Attributes](#attributes)
+    - [PhpSpreadsheet Original Usage Integration](#phpspreadsheet-original-usage-integration)
+      - [Inject PhpSpreadsheet](#inject-phpspreadsheet)
+      - [Extract PhpSpreadsheet](#extract-phpspreadsheet)
+    - [Merge Cells](#merge-cells)
+    - [Multiple Sheets](#multiple-sheets)
+      - [setSheet()](#setsheet)
+      - [getSheet()](#getsheet)
+    - [Map of Coordinates & Ranges](#map-of-coordinates--ranges)
+    - [Style Attributes](#style-attributes)
+    - [Columns Format](#columns-format)
+    - [All Cells Format](#all-cells-format)
+      - [setStyle()](#setstyle)
+      - [setWrapText()](#setwraptext)
+      - [setAutoSize()](#setautosize)
+  - [LIMITATIONS](#limitations)
+    - [Performance Issue](#performance-issue)
 
 ---
 
@@ -55,7 +59,7 @@ DEMONSTRATION
 Output an Excel file to browser for download:
 
 ```php
-\yidas\phpSpreadsheet\Helper::newSpreadsheet()
+\nueip\phpSpreadsheet\Helper::newSpreadsheet()
     ->addRow(['ID', 'Name', 'Email'])
     ->addRows([
         ['1', 'Nick','myintaer@gmail.com'],
@@ -64,14 +68,14 @@ Output an Excel file to browser for download:
     ->output('My Excel');
 ```
 
-<img src="https://raw.githubusercontent.com/yidas/phpspreadsheet-helper/master/img/demonstration.png" /> 
+<img src="https://raw.githubusercontent.com/nueip/phpspreadsheet-helper/master/img/demonstration.png" /> 
 
 ### Read from Excel
 
 Import above excel file and return two-dimensional array data contained rows > columns spread sheet:
 
 ```php
-$data = \yidas\phpSpreadsheet\Helper::newSpreadsheet('/tmp/My Excel.xlsx')
+$data = \nueip\phpSpreadsheet\Helper::newSpreadsheet('/tmp/My Excel.xlsx')
     ->getRows();
     
 print_r($data);
@@ -126,14 +130,14 @@ INSTALLATION
 
 Run Composer in your project:
 
-    composer require yidas/phpspreadsheet-helper
+    composer require nueip/phpspreadsheet-helper
     
 Then you could call it after Composer is loaded depended on your PHP framework:
 
 ```php
 require __DIR__ . '/vendor/autoload.php';
 
-\yidas\phpSpreadsheet\Helper::newSpreadsheet();
+\nueip\phpSpreadsheet\Helper::newSpreadsheet();
 ```
     
 ---
@@ -146,7 +150,7 @@ USAGE
 Simpliy read an Excel file then output to browser:
 
 ```php
-\yidas\phpSpreadsheet\Helper::newSpreadsheet('/tmp/excel.xlsx')
+\nueip\phpSpreadsheet\Helper::newSpreadsheet('/tmp/excel.xlsx')
     ->addRow(['Modified A1'])
     ->output();
 ```
@@ -180,7 +184,7 @@ public static string save(string $filename='excel', string $format='Xlsx')
 *Example:*
 
 ```php
-\yidas\phpSpreadsheet\Helper::newSpreadsheet()
+\nueip\phpSpreadsheet\Helper::newSpreadsheet()
     ->addRow(['Add A1'])
     ->save("/tmp/save");
 // /tmp/save.xlsx
@@ -199,7 +203,7 @@ public static array getRow(boolean $toString=true, array $options=[], callable $
 *Example:*
 
 ```php
-use \yidas\phpSpreadsheet\Helper;
+use \nueip\phpSpreadsheet\Helper;
 
 $row1 = Helper::newSpreadsheet($filepath)
     ->getRow();
@@ -210,10 +214,10 @@ print_r($row1);
 print_r($row2);
 ```
 
-*Example of fetching content per each row ([Example Code](https://github.com/yidas/phpspreadsheet-helper/blob/master/demo/get-row-loop.php)):*
+*Example of fetching content per each row ([Example Code](https://github.com/nueip/phpspreadsheet-helper/blob/master/demo/get-row-loop.php)):*
 
 ```php
-$helper = \yidas\phpSpreadsheet\Helper::newSpreadsheet($filepath);
+$helper = \nueip\phpSpreadsheet\Helper::newSpreadsheet($filepath);
 
 while ($row = $helper->getRow()) {
     // Each row data process
@@ -249,7 +253,7 @@ public static self addRow(array $rowData, array $rowAttributes=null)
 *Example of setting attributes for each cell:*
 
 ```php
-\yidas\phpSpreadsheet\Helper::newSpreadsheet()
+\nueip\phpSpreadsheet\Helper::newSpreadsheet()
     ->addRow([['value'=>'ID'], ['value'=>'Name'], ['value'=>'Email']])
     ->addRow(['ID', 'Name', 'Email']);
 ```
@@ -257,7 +261,7 @@ public static self addRow(array $rowData, array $rowAttributes=null)
 *Example of setting attributes for each row:*
 
 ```php
-\yidas\phpSpreadsheet\Helper::newSpreadsheet()
+\nueip\phpSpreadsheet\Helper::newSpreadsheet()
     // Set width as 25 to all cells of this row
     ->addRow([['value'=>'ID'], ['value'=>'Name'], ['value'=>'Email']], ['width'=>25]);
 ```
@@ -300,7 +304,7 @@ $objSheet->setTitle('Sheet');
 $objSheet->setCellValue('A1', 'SN');
 
 // Inject PhpSpreadsheet Object and Sheet Object to Helper
-\yidas\phpSpreadsheet\Helper::newSpreadsheet($objSpreadsheet)
+\nueip\phpSpreadsheet\Helper::newSpreadsheet($objSpreadsheet)
     ->setSheet($objSheet)
     ->setRowOffset(1) // Point to 1nd row from 0
     ->addRows([
@@ -313,7 +317,7 @@ $objSheet->setCellValue('A1', 'SN');
 #### Extract PhpSpreadsheet
 
 ```php
-use \yidas\phpSpreadsheet\Helper;
+use \nueip\phpSpreadsheet\Helper;
 
 Helper::newSpreadsheet()
     ->setSheet(0, 'Sheet')
@@ -342,7 +346,7 @@ It's easy to merge cells by defining each cell's span attributes:
 - `skip` : Number of colspan cells to merge with  
 
 ```php
-\yidas\phpSpreadsheet\Helper::newSpreadsheet()
+\nueip\phpSpreadsheet\Helper::newSpreadsheet()
     ->addRows([
         [['value'=>'SN', 'row'=>2], ['value'=>'Language', 'col'=>2], ['value'=>'Block', 'row'=>2, 'col'=>2]],
         ['','English','繁體中文',['skip'=>2]],
@@ -375,7 +379,7 @@ public static object getSheet($identity=null, $autoCreate=false)
 *Example:*
 
 ```php
-use \yidas\phpSpreadsheet\Helper;
+use \nueip\phpSpreadsheet\Helper;
 
 Helper::newSpreadsheet()
     ->setSheet(0, 'First Sheet')
@@ -410,7 +414,7 @@ Helper::output('MultiSheets');
 ### Map of Coordinates & Ranges
 
 ```php
-use \yidas\phpSpreadsheet\Helper;
+use \nueip\phpSpreadsheet\Helper;
 
 Helper::newSpreadsheet()
     ->addRows([
@@ -478,7 +482,7 @@ The style attribute could be set on a [single cell](#addrow), a [single row](#ad
 * `style`: a attribute refers to `applyFromArray()` for styling
 
 ```php
-\yidas\phpSpreadsheet\Helper::newSpreadsheet()
+\nueip\phpSpreadsheet\Helper::newSpreadsheet()
     // Each cell with each style attributes
     ->addRow([
         'Percentage', 
@@ -531,7 +535,7 @@ The options for each cell data:
 * `width`: setWidth() for the column
 
 ```php
-\yidas\phpSpreadsheet\Helper::newSpreadsheet()
+\nueip\phpSpreadsheet\Helper::newSpreadsheet()
     ->addRow([['value'=>'ID', 'width'=>10], ['value'=>'Name', 'width'=>25], ['value'=>'Email', 'width'=>50]])
     ->addRows([
         ['1', 'Nick','myintaer@gmail.com'],
@@ -555,7 +559,7 @@ public static self setStyle(array $styleArray, string $range=NULL)
 *Example:*
 
 ```php
-\yidas\phpSpreadsheet\Helper::newSpreadsheet()
+\nueip\phpSpreadsheet\Helper::newSpreadsheet()
     ->addRow(['Title', 'Content'])
     ->addRows([
         ['Basic Plan', "*Interface\n*Search Tool"],

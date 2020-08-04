@@ -2,7 +2,7 @@
 
 require __DIR__ . '/_config.php';
 
-$spreadsheet = \yidas\phpSpreadsheet\Helper::newSpreadsheet()
+$spreadsheet = \nueip\phpSpreadsheet\Helper::newSpreadsheet()
     ->getSpreadsheet();
 
 $arrayData = [
@@ -20,4 +20,4 @@ $spreadsheet->getActiveSheet()
         'D5'         // we want to set these values (default is A1)
     );
 
-\yidas\phpSpreadsheet\Helper::output();
+\nueip\phpSpreadsheet\Helper::output();

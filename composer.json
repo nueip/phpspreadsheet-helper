@@ -1,13 +1,13 @@
 {
-    "name": "yidas/phpspreadsheet-helper",
+    "name": "nueip/phpspreadsheet-helper",
     "description": "PHP Excel Helper - Write and read Spreadsheet with easy way based on PhpSpreadsheet",
     "keywords": ["PhpSpreadsheet", "PHPExcel", "php", "excel", "sheet", "PhpSpreadsheet helper"],
-    "homepage": "https://github.com/yidas/phpspreadsheet-helper",
+    "homepage": "https://github.com/nueip/phpspreadsheet-helper",
     "type": "library",
     "license": "MIT",
     "support": {
-        "issues": "https://github.com/yidas/phpspreadsheet-helper/issues",
-        "source": "https://github.com/yidas/phpspreadsheet-helper"
+        "issues": "https://github.com/nueip/phpspreadsheet-helper/issues",
+        "source": "https://github.com/nueip/phpspreadsheet-helper"
     },
     "minimum-stability": "stable",
     "require": {

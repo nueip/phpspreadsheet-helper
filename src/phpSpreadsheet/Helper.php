@@ -1,6 +1,6 @@
 <?php
 
-namespace yidas\phpSpreadsheet;
+namespace nueip\phpSpreadsheet;
 
 use Exception;
 
@@ -10,9 +10,9 @@ use Exception;
  * @author      Nick Tsai <myintaer@gmail.com>
  * @version     1.3.6
  * @filesource 	PhpSpreadsheet <https://github.com/PHPOffice/PhpSpreadsheet>
- * @see         https://github.com/yidas/phpspreadsheet-helper
+ * @see         https://github.com/nueip/phpspreadsheet-helper
  * @example
- *  \yidas\phpSpreadsheet\Helper::newExcel()
+ *  \nueip\phpSpreadsheet\Helper::newExcel()
  *      ->addRow(['ID', 'Name', 'Email'])
  *      ->addRows([
  *          ['1', 'Nick','myintaer@gmail.com'],

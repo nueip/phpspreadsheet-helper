@@ -4,10 +4,10 @@ require __DIR__ . '/_config.php';
 
 $row = [];
 for ($i=1; $i <= 100 ; $i++) { 
-    $value = \yidas\phpSpreadsheet\Helper::num2alpha($i);
+    $value = \nueip\phpSpreadsheet\Helper::num2alpha($i);
     $row[] = $value;
 }
 
-\yidas\phpSpreadsheet\Helper::newSpreadsheet()
+\nueip\phpSpreadsheet\Helper::newSpreadsheet()
     ->addRow($row)
     ->output();

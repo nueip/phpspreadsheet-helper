@@ -12,7 +12,7 @@ $objSheet = $objSpreadsheet->setActiveSheetIndex(0);
 $objSheet->setTitle('Sheet');
 $objSheet->setCellValue('A1', 'SN');
 // Inject PhpSpreadsheet Object and Sheet Object to Helper
-\yidas\phpSpreadsheet\Helper::newSpreadsheet($objSpreadsheet)
+\nueip\phpSpreadsheet\Helper::newSpreadsheet($objSpreadsheet)
     ->setSheet($objSheet)
     ->setRowOffset(1) // Point to 1nd row from 0
     ->addRows([
@@ -20,4 +20,4 @@ $objSheet->setCellValue('A1', 'SN');
         ['2'],
     ]);
     
-\yidas\phpSpreadsheet\Helper::output();
+\nueip\phpSpreadsheet\Helper::output();

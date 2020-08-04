@@ -35,7 +35,7 @@ $rowAttributes = [
     ],
 ];
 
-\yidas\phpSpreadsheet\Helper::newSpreadsheet()
+\nueip\phpSpreadsheet\Helper::newSpreadsheet()
     ->addRow([
         'Self Value', 
         null,  // This value will be overridden by row value attribute
