@@ -350,6 +350,7 @@ class Helper
                     // Cell Format
                     'width' => null,
                     'style' => null,
+                    'dataType' => null,
                 ];
 
                 // Row attributes inheriting process (Based on default value of map)
@@ -376,7 +377,11 @@ class Helper
                 $colAlpha = self::num2alpha($posCol);
 
                 // Set value
-                $sheetObj->setCellValueByColumnAndRow($posCol, self::$_offsetRow, $value);
+                if (isset($dataType)) {
+                    $sheetObj->setCellValueExplicitByColumnAndRow($posCol, self::$_offsetRow, $value, $dataType);
+                } else {
+                    $sheetObj->setCellValueByColumnAndRow($posCol, self::$_offsetRow, $value);
+                }
 
                 // Setting the column's width
                 if ($width) {
