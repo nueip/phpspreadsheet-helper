@@ -63,6 +63,11 @@ class Helper
     private static $_keyRangeMap;
 
     /**
+     * @var array|null Cached range of cells for reading: sheet object, highest row, highest column number
+     */
+    private static $_readRange;
+
+    /**
      * Extension list for reader
      */
     private static $_readerExtensions = [
@@ -152,6 +157,7 @@ class Helper
         self::$_objSheet = NULL;
         self::$_offsetRow = 0;
         self::$_offsetCol = 0; // A1 => 1
+        self::$_readRange = NULL;
 
         return new static();
     }
@@ -326,7 +332,8 @@ class Helper
     public static function addRow($rowData, $rowAttributes=null)
     {
         $sheetObj = self::validSheetObj();
-        
+        self::$_readRange = NULL;
+
         // Column pointer
         $posCol = self::$_offsetCol + 1;
 
@@ -558,14 +565,15 @@ class Helper
         $options = array_replace($defaultOptions, $options);
 
         // Calculate the column range of the worksheet
+        $readRange = self::readRange($worksheet);
         $startColumn = ($options['columnOffset']) ?: 0;
-        $columns = ($options['columns']) ?: self::alpha2num($worksheet->getHighestColumn());
+        $columns = ($options['columns']) ?: $readRange['column'];
 
         // Next row
         self::$_offsetRow++;
 
-        // Check if exceed highest row by PHPSpreadsheet cachedHighestRow
-        if (self::$_offsetRow > $worksheet->getHighestRow()) {
+        // Check if exceed highest row of cells
+        if (self::$_offsetRow > $readRange['row']) {
             return [];
         }
 
@@ -619,8 +627,9 @@ class Helper
         ];
         $options = array_replace($defaultOptions, $options);
 
-        // Get the highest row and column numbers referenced in the worksheet
-        $highestRow = $worksheet->getHighestRow();
+        // Get the highest row and column numbers of cells in the worksheet
+        $readRange = self::readRange($worksheet);
+        $highestRow = $readRange['row'];
         $rowOffset = ($options['rowOffset'] && $options['rowOffset'] <= $highestRow) 
             ? $options['rowOffset'] 
             : 0;
@@ -628,7 +637,7 @@ class Helper
             ? $options['rows']
             : $highestRow - $rowOffset;
         // Enhance performance for each getRow()
-        $options['columns'] = ($options['columns']) ?: self::alpha2num($worksheet->getHighestColumn());
+        $options['columns'] = ($options['columns']) ?: $readRange['column'];
 
         // Set row offset
         self::$_offsetRow = $rowOffset;
@@ -840,6 +849,30 @@ class Helper
             
             throw new Exception("Invalid or empty PhpSpreadsheet Object", 400);
         }
+    }
+
+    /**
+     * Get the highest row and column of cells for reading the sheet
+     *
+     * getHighestRow()/getHighestColumn() also count row and column dimensions such as width or hidden,
+     * so empty columns formatted up to XFD would make each getRow() create 16,384 cells.
+     * The range is scanned once and cached until the sheet is reset or a row is added by this helper.
+     *
+     * @param object $sheetObj PhpSpreadsheet Sheet Object
+     * @return array ['row' => (int) Highest row, 'column' => (int) Highest column number]
+     */
+    private static function readRange($sheetObj)
+    {
+        if (!self::$_readRange || self::$_readRange['sheet'] !== $sheetObj) {
+            $highest = $sheetObj->getHighestRowAndColumn();
+            self::$_readRange = [
+                'sheet' => $sheetObj,
+                'row' => (int)$highest['row'],
+                'column' => self::alpha2num($highest['column']),
+            ];
+        }
+
+        return self::$_readRange;
     }
 
     /**
